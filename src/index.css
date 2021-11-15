@@ -22,6 +22,7 @@ code {
 input {
   font-family: inherit;
 }
+input:focus {outline:none;}
 
 .header {
   width: 100%;
@@ -44,18 +45,17 @@ input {
 }
 
 .button {
-  width: 80px;
-  height: 30px;
+  height: 25px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
   font-size: 20px;
-  padding: 10px;
   font-weight: 500;
   color: inherit;
 }
 
 .button-green {
+  padding: 10px;
   background-color: var(--white);
   color: var(--light-green);
   border: 2px solid var(--light-green);
@@ -79,9 +79,22 @@ input {
   color: var(--white);
 }
 
+.add-button {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.delete-button {
+  margin-left: auto;
+}
+
 .get-started {
   margin-top: 50px;
   text-align: center;
+}
+
+.random-button {
+  margin-top: 20px;
 }
 
 .santa-wrapper {
@@ -113,4 +126,38 @@ input {
 .name-input {
   margin-top: 30px;
   display: flex;
+}
+
+.input-wrapper {
+  padding-top: 25px;
+  margin-right: 20px;
+  height: 20px;
+  width: 100%;
+}
+
+.text-input {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--darkest-green);
+  line-height: 20px;
+  font-size: 18px;
+  background: transparent;
+}
+
+.list-wrapper {
+  padding-top: 35px;
+  margin: auto;
+  width: 300px;
+}
+
+.list-item {
+  display: flex;
+}
+
+.name-table {
+  width: 100%;
+}
+
+.table-item {
+  padding: 5px;
 }
