@@ -1,5 +1,5 @@
 # A secret santa randomizer
-This project is for helping families decide who is giving a gift to who
+This project is for helping families decide who is giving a gift to whom
 
 
 # Getting Started with Create React App
