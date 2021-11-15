@@ -19,6 +19,10 @@ code {
     monospace;
 }
 
+input {
+  font-family: inherit;
+}
+
 .header {
   width: 100%;
   padding: 15px 0px 0px 10px;
@@ -40,6 +44,9 @@ code {
 }
 
 .button {
+  width: 80px;
+  height: 30px;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
   font-size: 20px;
@@ -60,7 +67,50 @@ code {
   color: var(--white);
 }
 
+.button-red {
+  background-color: var(--white);
+  color: var(--deep-red);
+  border: 2px solid var(--deep-red);
+  border-radius: 6px;
+}
+
+.button-red:hover {
+  background-color: var(--deep-red);
+  color: var(--white);
+}
+
 .get-started {
   margin-top: 50px;
   text-align: center;
+}
+
+.santa-wrapper {
+  background-color: var(--dark-green);
+  border-radius: 400px;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.rotate {
+  animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.name-input {
+  margin-top: 30px;
+  display: flex;
 }
