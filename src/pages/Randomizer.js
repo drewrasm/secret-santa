@@ -10,6 +10,7 @@ function Randomizer() {
     const [name, setName] = useState('')
     const [id, setId] = useState(1)
     const [results, setResults] = useState([])
+    const [exceptions, setExceptions] = useState([])
 
     const [showResults, setShowResults] = useState(false);
     const [showSanta, setShowSanta] = useState(true);
@@ -20,7 +21,7 @@ function Randomizer() {
 
     const handleAdd = () => {
         if(name.length > 0) {
-            setNames(names.concat({name: name, id: id}))
+            setNames(names.concat({name: name, id: id, exception: 0}))
             setName('')
             setId(id + 1)
         }
@@ -31,13 +32,17 @@ function Randomizer() {
     }
 
     const handleExceptionSelect = (name, exception) => {
+        if(exception === 0 && name.exception !== 0)  {
+            setExceptions(exceptions.filter(e => e !== exception))
+        }
         let newNames = names
         for(let n of newNames) {
             if(n.id === name.id) {
                 n['exception'] = exception
             }
         }
-        setNames(newNames)
+        setNames([...newNames])
+        setExceptions(exceptions.concat(exception))
     }
 
     const christmasTime = () => {
@@ -62,24 +67,26 @@ function Randomizer() {
                 </div>
                 <div className='list-wrapper'>
                     {names.map((item, index) => {
-                        return (<>
-                            <div className='list-item' key={index}>
+                        return (<div key={index}>
+                            <div className='list-item'>
                                 <div className='name'>- {item.name}</div>
                                 <div onClick={() => handleRemove(item)} className='delete-button button'>x</div>
                             </div>
                             <div>
                                 Exception:
-                                <select onChange={(e) => handleExceptionSelect(item, Number(e.target.value))}>
+                                <select value={item.exception || 0} onChange={(e) => handleExceptionSelect(item, Number(e.target.value))}>
                                     <option key='blank-select' value={0}>-------</option>
                                     {names.map((optionItem, optionIndex) => {
-                                        if(item.id !== optionItem.id ) {
-                                            return <option key={optionIndex + 'option'} value={optionItem.id}>{optionItem.name}</option>
+                                        if(item.id !== optionItem.id) {
+                                            return <option key={optionIndex + 'option'} value={optionItem.id} disabled={exceptions.includes(optionItem.id)}>{optionItem.name}</option>
                                         }
+                                        return null
                                     })}
                                 </select>
                             </div>
                             <br></br>
-                            </>)
+                        </div>
+                        )
                     })}
                 </div>
                 {names.length > 2 && (
@@ -91,7 +98,7 @@ function Randomizer() {
                 <>
                 {showSanta ? (
                     <div className='rotate santa-wrapper'>
-                        <img src={Santa}/>
+                        <img className='santa-img' alt='santa' src={Santa}/>
                     </div>
                 ): (<>
                     <div className='title'>START SHOPPING!</div>

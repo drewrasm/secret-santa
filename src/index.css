@@ -35,7 +35,6 @@ input:focus {outline:none;}
 
 .page {
   margin: auto;
-  width: 600px;
   margin-top: 80px;
 }
 
@@ -95,6 +94,7 @@ input:focus {outline:none;}
 
 .random-button {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .santa-wrapper {
@@ -104,6 +104,24 @@ input:focus {outline:none;}
   height: 500px;
   margin: auto;
   margin-top: 20px;
+}
+
+@media (max-width : 400px) {
+  .santa-wrapper {
+    background-color: var(--dark-green);
+    border-radius: 400px;
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  .santa-img {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    top: 30%;
+    left: 10%;  
+  }
 }
 
 .rotate {
@@ -124,6 +142,7 @@ input:focus {outline:none;}
 }
 
 .name-input {
+  justify-content: center;
   margin-top: 30px;
   display: flex;
 }
@@ -132,7 +151,7 @@ input:focus {outline:none;}
   padding-top: 25px;
   margin-right: 20px;
   height: 20px;
-  width: 100%;
+  width: 280px;
 }
 
 .text-input {

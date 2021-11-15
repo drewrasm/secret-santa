@@ -1,3 +1,7 @@
+# A secret santa randomizer
+This project is for helping families decide who is giving a gift to who
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
