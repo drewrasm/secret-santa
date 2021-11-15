@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Input from '../components/InputComponent'
+import MatchTable from '../components/MatchTable'
 import Santa from '../pixl_santa.png'
 import {computeMatches} from '../services/helpers'
 
@@ -7,7 +8,7 @@ function Randomizer() {
 
     const [names, setNames] = useState([])
     const [name, setName] = useState('')
-    const [id, setId] = useState(0)
+    const [id, setId] = useState(1)
     const [results, setResults] = useState([])
 
     const [showResults, setShowResults] = useState(false);
@@ -27,6 +28,16 @@ function Randomizer() {
 
     const handleRemove = (name) => {
         setNames(names.filter(n => n.id !== name.id))
+    }
+
+    const handleExceptionSelect = (name, exception) => {
+        let newNames = names
+        for(let n of newNames) {
+            if(n.id === name.id) {
+                n['exception'] = exception
+            }
+        }
+        setNames(newNames)
     }
 
     const christmasTime = () => {
@@ -51,11 +62,24 @@ function Randomizer() {
                 </div>
                 <div className='list-wrapper'>
                     {names.map((item, index) => {
-                        return (
+                        return (<>
                             <div className='list-item' key={index}>
                                 <div className='name'>- {item.name}</div>
                                 <div onClick={() => handleRemove(item)} className='delete-button button'>x</div>
-                            </div>)
+                            </div>
+                            <div>
+                                Exception:
+                                <select onChange={(e) => handleExceptionSelect(item, Number(e.target.value))}>
+                                    <option key='blank-select' value={0}>-------</option>
+                                    {names.map((optionItem, optionIndex) => {
+                                        if(item.id !== optionItem.id ) {
+                                            return <option key={optionIndex + 'option'} value={optionItem.id}>{optionItem.name}</option>
+                                        }
+                                    })}
+                                </select>
+                            </div>
+                            <br></br>
+                            </>)
                     })}
                 </div>
                 {names.length > 2 && (
@@ -69,25 +93,10 @@ function Randomizer() {
                     <div className='rotate santa-wrapper'>
                         <img src={Santa}/>
                     </div>
-                ): (
-                    <>
+                ): (<>
                     <div className='title'>START SHOPPING!</div>
-                    <div className='list-wrapper'>
-                        <table className='name-table'>
-                            <tbody>
-                                {results.map((item, index) => {
-                                return (
-                                    <tr key={index + 'e'}>
-                                        <td className='table-item'>{item.elf.name}</td>
-                                        <td className='table-item'>YOU HAVE</td>
-                                        <td className='table-item'>{item.match.name}</td>
-                                    </tr>)
-                                })} 
-                            </tbody>
-                        </table>
-                    </div>
-                    </>
-                )}
+                    <MatchTable results={results}/>
+                </>)}
                 </>
             )}
 
